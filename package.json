@@ -23,5 +23,8 @@
 	"dependencies": {
 		"typescript": "^5.5.0"
 	},
-	"files": ["dist"]
+	"files": ["dist", "README.md", "LICENSE"],
+	"publishConfig": {
+		"access": "public"
+	}
 }
