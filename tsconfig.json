@@ -1,25 +1,36 @@
 {
   "compilerOptions": {
-    "moduleResolution": "node",
-    "target": "es5",
-    "module": "es2015",
+    "target": "ES2015",
+    "module": "ESNext",
     "lib": [
       "ESNext",
-      "dom"
+      "DOM"
     ],
+    "moduleResolution": "node",
+    "isolatedModules": false,
     "strict": true,
+    "pretty": true,
+    "newLine": "lf",
     "sourceMap": true,
     "declaration": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
+    "declarationMap": true,
+    "importHelpers": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "emitDecoratorMetadata": true,
-    "declarationDir": "dist/types",
-    "outDir": "dist/lib",
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "outDir": "dist",
   },
   "include": [
-    "src/**/*.ts"
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }
