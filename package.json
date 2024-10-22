@@ -1,12 +1,11 @@
 {
 	"name": "monadio",
-	"version": "0.0.2",
-	"description": "",
-	"main": "dist/index.js",
+	"version": "0.0.3",
+	"description": "A little library that provides useful and smartly-typed monads for TypeScript.",
+	"main": "dist/lib/index.js",
 	"scripts": {
 		"watch": "tsc -w",
 		"build": "tsc",
-		"publish": "pnpm publish --access public",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [
