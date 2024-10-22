@@ -2,11 +2,11 @@
 	"name": "monadio",
 	"version": "0.0.1",
 	"description": "",
-	"main": "index.js",
+	"main": "dist/index.js",
 	"scripts": {
 		"watch": "tsc -w",
 		"build": "tsc",
-		"publish": "pnpm publish",
+		"publish": "pnpm publish --access public",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [
@@ -23,5 +23,6 @@
 	"packageManager": "pnpm@9.4.0",
 	"dependencies": {
 		"typescript": "^5.5.0"
-	}
+	},
+	"files": ["dist"]
 }
