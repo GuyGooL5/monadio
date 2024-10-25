@@ -20,7 +20,7 @@
 	"author": "Guy Tsitsiashvili",
 	"license": "MIT",
 	"packageManager": "pnpm@9.4.0",
-	"dependencies": {
+	"devDependencies": {
 		"typescript": "^5.5.0"
 	},
 	"files": ["dist", "README.md", "LICENSE"],
