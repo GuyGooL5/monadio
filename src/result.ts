@@ -45,7 +45,7 @@ export interface RawResult<T, E> {
  * It encapsulates a value that is either an `Ok` (successful result) or an `Err` (error result).
  * This class provides a robust way to handle errors and success cases without relying on exceptions.
  *
- * The result class provides a set of functional methods to work with the data and error values
+ * The `Result` class provides a set of functional methods to work with the data and error values
  * in a safe and expressive way without going through control flow statements, try/catch blocks, or type assertions.
  *
  * @remarks The `Result` class is inspired by Rust's `Result` type and the `Either` type in functional programming languages.
@@ -428,7 +428,7 @@ export class Result<T, E = unknown> implements RawResult<T, E> {
 	 * console.log(errResult.unwrap(() => 0)); // 0
 	 */
 	public unwrap(defaultValue: ValueOrFnOnce<T>): T {
-		return this.maybeOk().unwrapOr(defaultValue);
+		return this.maybeOk().unwrap(defaultValue);
 	}
 
 	/**
@@ -447,7 +447,7 @@ export class Result<T, E = unknown> implements RawResult<T, E> {
 	 * console.log(errResult.unwrapErr(() => new Error("default error"))); // Error: custom error
 	 */
 	public unwrapErr(defaultError: ValueOrFnOnce<E>): E {
-		return this.maybeErr().unwrapOr(defaultError);
+		return this.maybeErr().unwrap(defaultError);
 	}
 
 	/**
