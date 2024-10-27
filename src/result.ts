@@ -1,6 +1,6 @@
 import { AssertFailedError, NarrowError, ResultUnwrapErrError } from "./errors";
 import { Maybe } from "./maybe";
-import type { ValueOrFnOnce } from "./types";
+import type { ValueOrFnOnce } from "./_util";
 
 export type Ok<T> = { data: T };
 export type Err<E> = { error: E };
