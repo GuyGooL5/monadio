@@ -17,6 +17,11 @@
 		"switch",
 		"narrow"
 	],
+	"homepage": "https://github.com/GuyGooL5/monadio.git",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/GuyGooL5/monadio.git"
+	},
 	"author": "Guy Tsitsiashvili",
 	"license": "MIT",
 	"packageManager": "pnpm@9.4.0",
