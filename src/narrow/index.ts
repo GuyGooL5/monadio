@@ -1,5 +1,7 @@
+import { NarrowDiscriminate } from "./narrow-discriminate";
 import { NarrowSwitch } from "./narrow-switch";
 
 export const Narrow = {
-	switch: <T>(value: T) => NarrowSwitch.switch(value),
+	switch: NarrowSwitch.switch,
+	discriminate: NarrowDiscriminate.discriminate,
 } as const;

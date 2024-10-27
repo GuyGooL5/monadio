@@ -30,7 +30,7 @@ export class NarrowSwitch<TIn, TNarrowed extends TIn, TOut = never> {
 	 * //   ^? NarrowSwitch<User | Admin | Guest, User | Admin | Guest, never>
 	 * ```
 	 */
-	static switch<const T>(value: T) {
+	static switch<T>(value: T) {
 		return new NarrowSwitch<T, T>({ done: false, value });
 	}
 
