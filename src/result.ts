@@ -646,12 +646,35 @@ export class Result<T, E = unknown> implements RawResult<T, E> {
 	 * const errResult: Result<number, Error> = Result.Err(new Error('error'));
 	 * errResult.onErr((error) => console.error(error)); // this will be executed
 	 */
-	effectOnErr(effectFn: (error: Readonly<E>) => void): Result<T, E> {
+	public effectOnErr(effectFn: (error: Readonly<E>) => void): Result<T, E> {
 		return this.mapErr((e) => {
 			effectFn(e);
 			return e;
 		});
 	}
+
+	/**
+	 * Inverts the result instance, meaning that it swaps the data and error and returns a new result instance.
+	 * @remarks
+	 * - If the result is an Ok, it will return an Err with the data, and vice versa.
+	 * - This method is useful when you need to handle the error case as a data case and vice versa.
+	 *
+	 * @returns a new Result instance with the inverted data and error.
+	 *
+	 * @example
+	 * const result: Result<number, Error> = Result.Ok(5);
+	 * const invertedResult: Result<Error, number> = result.invert();
+	 * console.log(invertedResult.unwrapErrUnsafe()); // 5
+	 *
+	 * const errResult: Result<number, Error> = Result.Err(new Error('error'));
+	 * const invertedErrResult: Result<Error, number> = errResult.invert();
+	 * console.log(invertedErrResult.unwrapUnsafe()); // Error: error
+	 */
+	public invert(): Result<E, T> {
+		if (this.isOk()) return Result.Err(this.unwrapUnsafe());
+		return Result.Ok(this.unwrapErrUnsafe());
+	}
+
 	/**
 	 * Dump is used to extract the raw data of the result as a plain javascript object.
 	 * @returns a plain javascript object that contains the wrapped value (data or error).
