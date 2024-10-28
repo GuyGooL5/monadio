@@ -1,4 +1,4 @@
-import { Narrow } from "../../../src/narrow";
+import { Narrow } from "../../../lib/narrow";
 import type { IsExact } from "../test-tools";
 
 type Guest = { type: "guest"; name: string };
