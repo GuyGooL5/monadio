@@ -1,4 +1,4 @@
-import { NarrowDiscriminate } from "../../../src/narrow/narrow-discriminate";
+import { Narrow } from "../../../src/narrow";
 import type { IsExact } from "../test-tools";
 
 type TestType1 =
@@ -9,7 +9,7 @@ declare const testValue1: TestType1;
 
 // Test: discriminate and match work, and infer the correct types for the mapping functions
 () => {
-	NarrowDiscriminate.discriminate(testValue1, "key").match<void>(
+	Narrow.discriminate(testValue1, "key").match<void>(
 		{
 			value1: (v) => {
 				true satisfies IsExact<typeof v, { key: "value1"; value: number }>;
@@ -24,12 +24,12 @@ declare const testValue1: TestType1;
 
 // Test: match doesn't allow missing or extraneous discriminators
 () => {
-	NarrowDiscriminate.discriminate(testValue1, "key").match<void>(
+	Narrow.discriminate(testValue1, "key").match<void>(
 		// @ts-expect-error: ts(2345) - Property 'value2' is missing
 		{ value1: () => {} },
 		() => {},
 	);
-	NarrowDiscriminate.discriminate(testValue1, "key").match<void>(
+	Narrow.discriminate(testValue1, "key").match<void>(
 		{
 			value1: () => {},
 			value2: () => {},
@@ -42,7 +42,7 @@ declare const testValue1: TestType1;
 
 // Test: return types are inferred correctly
 () => {
-	NarrowDiscriminate.discriminate(testValue1, "key").match(
+	Narrow.discriminate(testValue1, "key").match(
 		{ value1: () => 1, value2: () => 2 },
 		() => 0,
 	) satisfies number;
@@ -50,7 +50,7 @@ declare const testValue1: TestType1;
 
 // Test: infered mixed return types are not allowed
 () => {
-	NarrowDiscriminate.discriminate(testValue1, "key").match(
+	Narrow.discriminate(testValue1, "key").match(
 		{
 			value1: () => 1,
 			value2: () =>
@@ -72,7 +72,7 @@ declare const testValue2: TestType2;
 
 // Test: discriminate and match work with any PropertyKey type as the discriminator
 () => {
-	NarrowDiscriminate.discriminate(testValue2, "key").match<void>(
+	Narrow.discriminate(testValue2, "key").match<void>(
 		{
 			a: (v) => {
 				true satisfies IsExact<typeof v, { key: "a"; value: string }>;
@@ -93,12 +93,12 @@ declare const testValue2: TestType2;
 
 // Test: match doesn't allow missing discriminators of type number and symbol
 () => {
-	NarrowDiscriminate.discriminate(testValue2, "key").match<void>(
+	Narrow.discriminate(testValue2, "key").match<void>(
 		// @ts-expect-error: ts(2345) - symbol type is missing
 		{ a: () => {}, 1: () => {} },
 		() => {},
 	);
-	NarrowDiscriminate.discriminate(testValue2, "key").match<void>(
+	Narrow.discriminate(testValue2, "key").match<void>(
 		// @ts-expect-error: ts(2345) - number type is missing
 		{ a: () => {}, [TEST_SYMBOL]: () => {} },
 		() => {},
@@ -114,7 +114,7 @@ declare const testValue3: TestType3;
 // Test: cannot discriminate on a key that doesn't extend PropertyKey
 () => {
 	// @ts-expect-error: ts(2345)
-	NarrowDiscriminate.discriminate(testValue3, "key");
+	Narrow.discriminate(testValue3, "key");
 };
 
 type TestType4 =
@@ -127,7 +127,7 @@ declare const testValue4: TestType4;
 // Test: cannot discriminate on a key that is not present in all union members
 () => {
 	// @ts-expect-error: ts(2345)
-	NarrowDiscriminate.discriminate(testValue4, "key");
+	Narrow.discriminate(testValue4, "key");
 };
 
 type TestType5 =
@@ -138,8 +138,8 @@ declare const testValue5: TestType5;
 
 // Test: allow multiple discriminators for the same type
 () => {
-	NarrowDiscriminate.discriminate(testValue5, "key1");
-	NarrowDiscriminate.discriminate(testValue5, "key2");
+	Narrow.discriminate(testValue5, "key1");
+	Narrow.discriminate(testValue5, "key2");
 };
 
 type TestType6 = { key: "a"; value: string };
@@ -148,14 +148,14 @@ declare const testValue6: TestType6;
 
 // Test: fallback must be provided
 () => {
-	NarrowDiscriminate.discriminate(testValue6, "key")
+	Narrow.discriminate(testValue6, "key")
 		// @ts-expect-error: ts(2554) - Expected 2 arguments, but got 1
 		.match<void>({ a: () => {} });
 };
 
 // Test: fallback parameter type is unknown
 () => {
-	NarrowDiscriminate.discriminate(testValue6, "key").match<void>(
+	Narrow.discriminate(testValue6, "key").match<void>(
 		{ a: () => {} },
 		(fallback) => {
 			true satisfies IsExact<typeof fallback, unknown>;
@@ -172,7 +172,7 @@ declare const testValue7: TestType7;
 
 // Test: same discriminator value in different members results in a union of the types
 () => {
-	NarrowDiscriminate.discriminate(testValue7, "key").match<void>(
+	Narrow.discriminate(testValue7, "key").match<void>(
 		{
 			a: (v) => {
 				true satisfies IsExact<
@@ -190,17 +190,17 @@ declare const testValue7: TestType7;
 
 // Test: discriminating generalized non-literal types is not allowed (string | number | symbol)
 () => {
-	NarrowDiscriminate.discriminate(
+	Narrow.discriminate(
 		null as unknown as { key: string } | { key: "a" },
 		// @ts-expect-error: ts(2345)
 		"key",
 	);
-	NarrowDiscriminate.discriminate(
+	Narrow.discriminate(
 		null as unknown as { key: number } | { key: 1 },
 		// @ts-expect-error: ts(2345)
 		"key",
 	);
-	NarrowDiscriminate.discriminate(
+	Narrow.discriminate(
 		null as unknown as { key: symbol } | { key: typeof TEST_SYMBOL },
 		// @ts-expect-error: ts(2345)
 		"key",
