@@ -1,35 +1,48 @@
 {
-	"name": "monadio",
-	"version": "0.0.9",
-	"description": "A little library that provides useful and smartly-typed monads for TypeScript.",
-	"main": "dist/index.js",
-	"scripts": {
-		"watch": "tsc -w",
-		"build": "tsc",
-		"test": "tsc --noEmit"
-	},
-	"keywords": [
-		"monad",
-		"functional",
-		"typescript",
-		"result",
-		"maybe",
-		"switch",
-		"narrow"
-	],
-	"homepage": "https://github.com/GuyGooL5/monadio.git",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/GuyGooL5/monadio.git"
-	},
-	"author": "Guy Tsitsiashvili",
-	"license": "MIT",
-	"packageManager": "pnpm@9.4.0",
-	"devDependencies": {
-		"typescript": "^5.5.0"
-	},
-	"files": ["dist", "README.md", "LICENSE"],
-	"publishConfig": {
-		"access": "public"
-	}
+  "name": "monadio",
+  "version": "0.0.9",
+  "description": "A little library that provides useful and smartly-typed monads for TypeScript.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
+    }
+  },
+  "scripts": {
+    "watch": "tsc -w",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build": "npm run build:cjs && npm run build:esm",
+    "test": "tsc --noEmit"
+  },
+  "keywords": [
+    "monad",
+    "functional",
+    "typescript",
+    "result",
+    "maybe",
+    "switch",
+    "narrow"
+  ],
+  "homepage": "https://github.com/GuyGooL5/monadio.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GuyGooL5/monadio.git"
+  },
+  "author": "Guy Tsitsiashvili",
+  "license": "MIT",
+  "packageManager": "pnpm@9.4.0",
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
